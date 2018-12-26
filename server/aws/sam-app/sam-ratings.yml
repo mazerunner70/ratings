@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS Serverless Spring Boot API - uk.co.ameth::harvest-ratings
+Globals:
+  Api:
+    EndpointConfiguration: REGIONAL
+
+Parameters:
+  IOS_APP_ID:
+  Type: String
+  Description: the number id of the iOS Application
+
+Resources:
+  HarvestRatingsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: uk.co.ameth.StreamLambdaHandler::handleRequest
+      Runtime: java8
+      CodeUri: build/harvest-ratings-1.0-SNAPSHOT.jar
+      MemorySize: 128
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 10
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+      Environment:
+        Variables:
+          iOS_APP_ID: !Ref IOS_APP_ID
+
+Outputs:
+  HarvestRatingsApi:
+    Description: URL for application
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
+    Export:
+      Name: HarvestRatingsApi
