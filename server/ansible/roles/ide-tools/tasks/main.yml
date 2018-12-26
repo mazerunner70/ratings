@@ -1,0 +1,53 @@
+---
+
+- name: Create missing locales
+  become: true
+  command: locale-gen en_GB.UTF-8
+
+- name: set locale
+  become: true
+  action: command update-locale LC_ALL=en_GB.utf8
+
+- name: Add terminal to unity bar
+  copy:
+    src: files/scripts/startup_config.sh
+    dest: /home/vagrant/bin/
+    owner: vagrant
+    group: vagrant
+    mode: 0744
+
+- name: gnomerc runs on desktop startup, then runs script above
+  copy:
+    src: files/scripts/.gnomerc
+    dest: /home/vagrant/.gnomerc
+    owner: vagrant
+    group: vagrant
+    mode: 0744
+
+- name: install intellij community via snap
+  become: true
+  command: snap install intellij-idea-community --classic
+
+# This section loads latest Java 8 openJdk
+- name: add repo for java 8
+  become: true
+  apt_repository:
+    repo: 'ppa:webupd8team/java'
+    state: present
+
+- name: set license selected
+  become: true
+  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+
+- name: set license seen
+  become: true
+  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
+
+- name: install java 8
+  become: true
+  apt:
+    name: oracle-java8-installer
+    state: latest
+    update_cache: yes
+    force: yes
+

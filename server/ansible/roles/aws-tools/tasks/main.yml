@@ -1,0 +1,110 @@
+---
+# roles/aws/tasks/main.yml
+
+- name: requires setuptools for python 3
+  become: true
+  apt:
+    name:
+      - python3-setuptools
+    state: latest
+    install_recommends: no
+
+
+# Now to deploy SAM 
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html
+# -----------------
+
+- name: update apt cache
+  become: true
+  apt:
+    update_cache: yes
+
+- name: install packages to assist docker download
+  become: true
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: latest
+    install_recommends: no
+
+- name: place repo gpg in list
+  become: true
+  shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - "
+
+- name: add repository
+  become: true
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+    state: present
+
+- name: another apt update
+  become: true
+  apt:
+    update_cache: yes
+
+- name: install docker
+  become: true
+  apt:
+    name:
+      - docker-ce
+    state: latest
+    install_recommends: yes
+
+- name: add docker group to vagrant (will need relogin to apply, else sam will ask is docker installed)
+  become: true
+  user:
+    name: vagrant
+    groups: docker
+    append: yes
+
+# Install python 3.6
+- name: install python-dev
+  become: true
+  apt:
+    name:
+      - python-software-properties
+    state: latest
+    install_recommends: yes
+
+- name: add python repo
+  become: true
+  apt_repository:
+    repo: ppa:jonathonf/python-3.6
+    state: present
+
+- name: another apt update
+  become: true
+  apt:
+    update_cache: yes
+
+- name: install python 3.6
+  become: true
+  apt:
+    name:
+      - python3.6
+      - python3.6-dev
+      - python3.6-venv
+    state: latest
+    install_recommends: yes
+
+- name: install pip3.6
+  become: true
+  shell: "curl https://bootstrap.pypa.io/get-pip.py | sudo -H python3.6"
+
+- name: install awscli
+  pip:
+    name: awscli
+    extra_args: --user --upgrade
+    executable: pip3
+
+- name: install aws-sam-cli
+# Install AWS SAM CLI
+#
+  pip:
+    name: aws-sam-cli
+    extra_args: --user --upgrade
+    executable: pip3.6
+
