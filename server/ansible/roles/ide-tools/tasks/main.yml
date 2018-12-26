@@ -51,3 +51,11 @@
     update_cache: yes
     force: yes
 
+- name: install maven
+  become: true
+  apt:
+    name: maven
+    state: latest
+    update_cache: yes
+    force: yes
+

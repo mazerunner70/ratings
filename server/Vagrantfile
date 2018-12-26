@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
     # Grant 4 cpus
     vb.cpus = 4
     # Name the box
-    vb.name= "templogger"
+    vb.name= "ratings"
   end
 
 
