@@ -19,7 +19,8 @@ public class StreamLambdaHandler implements RequestStreamHandler {
         System.out.println("554");
         try {
             handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(Application.class);
-            handler.activateSpringProfiles("lambda");
+//            handler.activateSpringProfiles("lambda");
+            System.out.println("Proxy Handler Started");
         } catch (ContainerInitializationException e) {
             // if we fail here. We re-throw the exception to force another cold start
             e.printStackTrace();
@@ -30,6 +31,8 @@ public class StreamLambdaHandler implements RequestStreamHandler {
     @Override
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context)
             throws IOException {
+        System.out.println("Request received");
+        System.out.println("context:"+context);
         handler.proxyStream(inputStream, outputStream, context);
 
         outputStream.close();

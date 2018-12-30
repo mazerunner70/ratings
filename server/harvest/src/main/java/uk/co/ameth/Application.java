@@ -1,28 +1,28 @@
 package uk.co.ameth;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import uk.co.ameth.ratings.harvest.ios.IosPollController;
+import uk.co.ameth.ratings.harvest.android.AndroidUploadController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import uk.co.ameth.controller.PingController;
 
 
 @SpringBootApplication
 // We use direct @Import instead of @ComponentScan to speed up cold starts
 // @ComponentScan(basePackages = "uk.co.ameth.controller")
-@Import({ PingController.class })
+@Import({ IosPollController.class, AndroidUploadController.class })
 public class Application extends SpringBootServletInitializer {
 
     /*
@@ -30,6 +30,7 @@ public class Application extends SpringBootServletInitializer {
      */
     @Bean
     public HandlerMapping handlerMapping() {
+        System.out.println("Mapping requested");
         return new RequestMappingHandlerMapping();
     }
 
@@ -61,6 +62,10 @@ public class Application extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        System.out.println("failing");
+        new SpringApplicationBuilder(SpringBootApplication.class)
+                .initializers((GenericApplicationContext c ) -> c.setAllowBeanDefinitionOverriding(true))
+                .run(args);
+//        SpringApplication.run(Application.class, args);
     }
 }
