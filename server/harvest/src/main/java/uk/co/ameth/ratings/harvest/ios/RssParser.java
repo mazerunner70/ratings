@@ -46,6 +46,7 @@ public class RssParser {
                 Node entryNode = nodeList.item(f);
                 Node node = entryNode.getFirstChild();
                 Review review = new Review();
+                review.setPlatform("ios");
                 while (node != null) {
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         String nodeName = node.getNodeName();

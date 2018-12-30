@@ -115,11 +115,22 @@ class ReviewRepositoryTest {
         reviewEntry.setRating(5);
         reviewEntry.setText("Hello World");
         reviewEntry.setTimestamp(1234456578L);
+        reviewEntry.setVersion("2.1.2");
         reviewRepository.save(reviewEntry);
         List<ReviewEntry> result = (List<ReviewEntry>)reviewRepository.findAll();
         assertTrue(result.size()>0);
         assertEquals(result.size(), 1);
-        System.out.println(reviewEntry.toString());
+        assertEquals(result.get(0), reviewEntry);
+        List<ReviewEntry> reviewsFromTimestamp = reviewRepository.findByTimestamp(1234456578L);
+        assertEquals(reviewsFromTimestamp.size(), 1);
+        assertEquals(result.get(0), reviewEntry);
+        List<ReviewEntry> reviewsFromPlatformAndTimestamp = reviewRepository.findByPlatformAndTimestamp("and", 1234456578L);
+        assertEquals(reviewsFromPlatformAndTimestamp.size(), 1);
+        assertEquals(result.get(0), reviewEntry);
+        reviewsFromPlatformAndTimestamp = reviewRepository.findByPlatformAndTimestamp("aios", 1234456578L);
+        assertEquals(reviewsFromPlatformAndTimestamp.size(), 0);
+
+
 
     }
 
