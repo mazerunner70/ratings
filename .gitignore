@@ -25,6 +25,7 @@ ansible_vault_password.txt
 # Java config #
 ###############
 secure.properties
+**/config/application.properties
 
 # Maven build files #
 #####################
@@ -35,4 +36,8 @@ target/
 out.txt
 site.retry
 
+# Dynamo db local files            #
+# (do mvn test-compile to recover) #
+####################################
+native-libs
 

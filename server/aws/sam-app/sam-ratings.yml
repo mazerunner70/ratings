@@ -6,9 +6,10 @@ Globals:
     EndpointConfiguration: REGIONAL
 
 Parameters:
-  IOS_APP_ID:
-  Type: String
-  Description: the number id of the iOS Application
+  IosAppId:
+    Type: String
+    Default: 9999999
+    Description: the number id of the iOS Application
 
 Resources:
   HarvestRatingsFunction:
@@ -17,9 +18,9 @@ Resources:
       Handler: uk.co.ameth.StreamLambdaHandler::handleRequest
       Runtime: java8
       CodeUri: build/harvest-ratings-1.0-SNAPSHOT.jar
-      MemorySize: 128
+      MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
-      Timeout: 10
+      Timeout: 60
       Events:
         GetResource:
           Type: Api
@@ -28,8 +29,21 @@ Resources:
             Method: any
       Environment:
         Variables:
-          iOS_APP_ID: !Ref IOS_APP_ID
-
+          IOS_APP_KEY: !Ref IosAppId
+  RatingsDbTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Review
+      AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+      BillingMode: "PROVISIONED"
+      ProvisionedThroughput:
+        ReadCapacityUnits: "1"
+        WriteCapacityUnits: "1"
 Outputs:
   HarvestRatingsApi:
     Description: URL for application
