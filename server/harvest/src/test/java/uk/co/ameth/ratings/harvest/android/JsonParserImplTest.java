@@ -22,7 +22,6 @@ import java.util.List;
 @Import(JsonParserImplTest.JsonParserConfiguration.class)
 class JsonParserImplTest {
 
-
     @TestConfiguration
     static class JsonParserConfiguration {
         public JsonParserConfiguration() {
@@ -37,7 +36,6 @@ class JsonParserImplTest {
 
     @Autowired
     private JsonParser jsonParser;
-
 
     @Test
     void parseJson() throws IOException {

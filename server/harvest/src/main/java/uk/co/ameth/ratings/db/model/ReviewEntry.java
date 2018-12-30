@@ -6,6 +6,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import uk.co.ameth.ratings.harvest.Review;
 
+import java.util.Objects;
+
 @DynamoDBTable(tableName = "Review")
 public class ReviewEntry {
 
@@ -74,6 +76,24 @@ public class ReviewEntry {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReviewEntry)) return false;
+        ReviewEntry that = (ReviewEntry) o;
+        return getTimestamp() == that.getTimestamp() &&
+                getRating() == that.getRating() &&
+                getId().equals(that.getId()) &&
+                getPlatform().equals(that.getPlatform()) &&
+                Objects.equals(getText(), that.getText()) &&
+                getVersion().equals(that.getVersion());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getPlatform(), getTimestamp(), getRating(), getText(), getVersion());
     }
 
     @Override

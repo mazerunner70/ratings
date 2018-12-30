@@ -35,6 +35,7 @@ target/
 ##############
 out.txt
 site.retry
+.Trash-1000
 
 # Dynamo db local files            #
 # (do mvn test-compile to recover) #

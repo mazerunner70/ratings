@@ -18,7 +18,10 @@ public class ReviewService {
     public void saveReviews(List<Review> reviews) {
         for (Review review : reviews) {
             ReviewEntry reviewEntry = ReviewEntry.asReviewEntry(review);
-            reviewRepository.save(reviewEntry);
+            List<ReviewEntry> reviewEntries = reviewRepository.findByPlatformAndTimestamp(reviewEntry.getPlatform(), reviewEntry.getTimestamp());
+            if (reviewEntries.size() == 0) {
+                reviewRepository.save(reviewEntry);
+            }
         }
     }
 
