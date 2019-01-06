@@ -1,52 +1,60 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
 Description: AWS Serverless Spring Boot API - uk.co.ameth::harvest-ratings
 Globals:
   Api:
     EndpointConfiguration: REGIONAL
-
-Parameters:
-  IosAppId:
-    Type: String
-    Default: 9999999
-    Description: the number id of the iOS Application
-
-Resources:
-  HarvestRatingsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: uk.co.ameth.StreamLambdaHandler::handleRequest
-      Runtime: java8
-      CodeUri: build/harvest-ratings-1.0-SNAPSHOT.jar
-      MemorySize: 512
-      Policies: AWSLambdaBasicExecutionRole
-      Timeout: 60
-      Events:
-        GetResource:
-          Type: Api
-          Properties:
-            Path: /{proxy+}
-            Method: any
-      Environment:
-        Variables:
-          IOS_APP_KEY: !Ref IosAppId
-  RatingsDbTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: Review
-      AttributeDefinitions:
-        - AttributeName: "id"
-          AttributeType: "S"
-      KeySchema:
-        - AttributeName: "id"
-          KeyType: "HASH"
-      BillingMode: "PROVISIONED"
-      ProvisionedThroughput:
-        ReadCapacityUnits: "1"
-        WriteCapacityUnits: "1"
 Outputs:
   HarvestRatingsApi:
     Description: URL for application
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
     Export:
       Name: HarvestRatingsApi
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
+Parameters:
+  amazonawsaccessKey:
+    Type: String
+  amazonawssecretkey:
+    Type: String
+  amazondynamodbendpoint:
+    Type: String
+  iOSAPPID:
+    Type: String
+  iOSurl:
+    Type: String
+Resources:
+  HarvestRatingsFunction:
+    Properties:
+      CodeUri: build/harvest-ratings-1.0-SNAPSHOT.jar
+      Environment:
+        Variables:
+          AMAZON_AWS_ACCESSKEY: !Ref 'amazonawsaccessKey'
+          AMAZON_AWS_SECRETKEY: !Ref 'amazonawssecretkey'
+          AMAZON_DYNAMODB_ENDPOINT: !Ref 'amazondynamodbendpoint'
+          IOS_APP_ID: !Ref 'iOSAPPID'
+          IOS_URL: !Ref 'iOSurl'
+      Events:
+        GetResource:
+          Properties:
+            Method: any
+            Path: /{proxy+}
+          Type: Api
+      Handler: uk.co.ameth.StreamLambdaHandler::handleRequest
+      MemorySize: 512
+      Policies: AWSLambdaBasicExecutionRole
+      Runtime: java8
+      Timeout: 60
+    Type: AWS::Serverless::Function
+  RatingsDbTable:
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+      BillingMode: PROVISIONED
+      KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: '1'
+        WriteCapacityUnits: '1'
+      TableName: Review
+    Type: AWS::DynamoDB::Table
+Transform: AWS::Serverless-2016-10-31

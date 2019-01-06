@@ -22,13 +22,13 @@ import uk.co.ameth.ratings.db.repositories.ReviewRepository;
 public class DynamoDbConfig {
 
 
-    @Value("${amazon.dynamodb.endpoint}")
+    @Value("${AMAZON_DYNAMODB_ENDPOINT}")
     private String amazonDynamoDbEndpoint;
 
-    @Value("${amazon.aws.accessKey}")
+    @Value("${AMAZON_AWS_ACCESSKEY}")
     private String amazonAwsAccessKey;
 
-    @Value("${amazon.aws.secretkey}")
+    @Value("${AMAZON_AWS_SECRETKEY}")
     private String amazonAwsSecretKey;
 
     @Autowired

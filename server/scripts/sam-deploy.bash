@@ -18,15 +18,16 @@ printf "SAM app directory at ${SAM_APP_DIR}\n"
 
 pushd ${SAM_APP_DIR}
 
+printf "Deploying\n"
 
-sam deploy \
+aws cloudformation deploy \
    --template-file /tmp/packaged.yaml \
    --stack-name ${STACK_NAME} \
    --capabilities CAPABILITY_IAM \
    --region eu-west-1 \
-   --parameter-overrides "IosAppId=${IOS_APP_ID}"
+   --parameter-overrides $(cat /home/vagrant/.aws/cf-config.json)
 
-
+printf "Deploy done"
 
 popd
 
