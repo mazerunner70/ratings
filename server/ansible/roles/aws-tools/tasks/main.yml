@@ -108,3 +108,9 @@
     extra_args: --user --upgrade
     executable: pip3.6
 
+- name: install python yaml support
+  pip:
+    name: yaml
+    extra_args: --user --upgrade
+    executable: pip3.6
+

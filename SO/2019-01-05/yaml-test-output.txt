@@ -1,0 +1,7 @@
+Outputs:
+  HarvestApi:
+    Description: URL for application
+    Export:
+      Name: HarvestApi
+    Value: !<Ref> 'LocationRef'
+

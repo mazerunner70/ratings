@@ -24,10 +24,10 @@ public class HttpReader {
         System.out.println("setting"+iosAppId);this.iosAppId = iosAppId;
     }
 
-    @Value("${iOS.url}")
+    @Value("${IOS_URL}")
     private String iosUrl;
 
-    @Value("${iOS_APP_ID}")
+    @Value("${IOS_APP_ID}")
     private String iosAppId;
 
     private CloseableHttpClient httpClient;
