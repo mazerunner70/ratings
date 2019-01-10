@@ -13,7 +13,6 @@ phases:
   pre_build:
     commands:
       - echo Entered the pre_build phase...
-      - cd server/harvest
     finally:
       - echo This always runs even if the login command fails 
   build:
