@@ -19,6 +19,8 @@ phases:
       - echo Build started on `date`
       - pwd
       - ls -l
+      - cd server/harvest
+      - ls -l
       - echo now build
       - mvn package
     finally:
