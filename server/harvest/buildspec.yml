@@ -17,6 +17,9 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
+      - pwd
+      - ls -l
+        echo now build
       - mvn package
     finally:
       - echo This always runs even if the install command fails
