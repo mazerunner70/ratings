@@ -32,6 +32,6 @@ phases:
       - echo Build completed on `date`
 artifacts:
   files:
-    - target/harvest-ratings-1.0-SNAPSHOT.jar
+    - '**/*'
   discard-paths: yes
 
