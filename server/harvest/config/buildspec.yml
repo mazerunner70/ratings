@@ -30,6 +30,8 @@ phases:
     commands:
       - echo Entered the post_build phase...
       - echo Build completed on `date`
+      - ls -l
+      - pwd
 artifacts:
   files:
     - '**/*'
