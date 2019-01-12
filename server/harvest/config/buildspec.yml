@@ -30,10 +30,10 @@ phases:
     commands:
       - echo Entered the post_build phase...
       - echo Build completed on `date`
-      - ls -l
+      - ls -l server/harvest/target
       - pwd
 artifacts:
   files:
-    - '**/*'
+    - server/harvest/target/harvest-ratings-1.0-SNAPSHOT.jar
   discard-paths: yes
 
