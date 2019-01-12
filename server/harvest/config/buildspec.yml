@@ -29,7 +29,7 @@ phases:
   post_build:
     commands:
       - echo Entered the post_build phase...
-      - echo Build completed on `date`
+      - echo Build completed o `date`
       - ls -l
       - pwd
 artifacts:
@@ -40,8 +40,10 @@ artifacts:
     cf-config:
       files:
         - server/aws/sam-app/sam-ratings.yml
+      discard-paths: yes
     jar-file:
       files:
         - server/harvest/target/harvest-ratings-1.0-SNAPSHOT.jar
+      discard-paths: yes
 
 
