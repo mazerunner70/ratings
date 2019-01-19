@@ -141,7 +141,7 @@ Resources:
                 Provider: CloudFormation
               Configuration:
                 ActionMode: CREATE_UPDATE
-                Capabilities: CAPABILITY_AUTO_EXPAND
+                Capabilities: CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND
                 ParameterOverrides: |
                   {
                     "amazonawsaccessKey": "opiu",
@@ -150,7 +150,7 @@ Resources:
                     "iOSAPPID": "poiu",
                      "iOSurl":"oiuy"
                   }
-                TemplatePath: BuildOutput::sam-ratings.yml
+                TemplatePath: PackageOutput::sam-ratings-packaged.yaml
                 StackName: HarvestDeploy
                 RoleArn: arn:aws:iam::915524423834:role/mini-admin
               RunOrder: 1
