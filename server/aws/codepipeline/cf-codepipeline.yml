@@ -279,6 +279,6 @@ Resources:
       ServiceRole: !Ref CodeBuildRatingsServiceRole
       Source:
         Type: CODEPIPELINE
-        BuildSpec: server/harvest/config/packagespec.yml
+        BuildSpec: ./packagespec.yml
         InsecureSsl: false
       TimeoutInMinutes: 7
