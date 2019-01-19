@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entered the install phase...
+      - aws cloudformation package --template-file sam-ratings.yml
+                                   --output-template-file sam-ratings-packaged.yaml
+                                   --s3-bucket wils-staging-1
+
+    finally:
+      - echo This always runs even if the update or install command fails 
+artifacts:
+  files:
+    - server/harvest/target/harvest-ratings-1.0-SNAPSHOT.jar
+    - server/aws/sam-app/sam-ratings.yml
+    - sam-ratings-packaged.yaml
+  discard-paths: yes
+
