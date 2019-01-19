@@ -67,9 +67,21 @@ def create_props(file_config):
   separator = file_config.get('separator')
   result = ""
   for secretid in secretids:
-#    print ("--", secretid)
+    #    print ("--", secretid)
     secret = secrets_map.get(secretid)
     result += f'{secretid}{separator}{secret}\n'
+  return result
+
+def create_json(file_config):
+  secretids = file_config.get('secrets')
+  result = "[\n"
+  sep = ""
+  for secretid in secretids:
+    #    print ("--", secretid)
+    secret = secrets_map.get(secretid)
+    result += f'{sep}\n  {{\n    "ParameterKey": "{secretid}",\n    "ParameterValue": "{secret}"\n  }}'
+    sep=","
+  result += "]"
   return result
 
 def asJson(propsMap):
@@ -170,7 +182,8 @@ for file_config in files:
   filecreate_types = {
     'ini-file': create_ini,
     'properties-file': create_props,
-    'sam-template': edit_sam_template
+    'sam-template': edit_sam_template,
+    'json-file': create_json
   }
   createfileText = filecreate_types.get(filetype, lambda a: "Invalid month")
   text = createfileText(file_config)
