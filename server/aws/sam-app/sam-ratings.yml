@@ -23,7 +23,7 @@ Parameters:
 Resources:
   HarvestRatingsFunction:
     Properties:
-      CodeUri: build/harvest-ratings-1.0-SNAPSHOT.jar
+      CodeUri: ./harvest-ratings-1.0-SNAPSHOT.jar
       Environment:
         Variables:
           AMAZON_AWS_ACCESSKEY: !Ref 'amazonawsaccessKey'
