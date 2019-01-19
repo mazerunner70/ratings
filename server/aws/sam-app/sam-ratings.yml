@@ -4,7 +4,7 @@ Globals:
   Api:
     EndpointConfiguration: REGIONAL
 Outputs:
-  HarvestRatingsApi:
+  HarvestReviewsApi:
     Description: URL for application
     Export:
       Name: HarvestRatingsApi
