@@ -21,7 +21,7 @@ Parameters:
   iOSurl:
     Type: String
 Resources:
-  HarvestRatingsFunction:
+  HarvestReviewsFunction:
     Properties:
       CodeUri: ./harvest-ratings-1.0-SNAPSHOT.jar
       Environment:
@@ -43,7 +43,7 @@ Resources:
       Runtime: java8
       Timeout: 60
     Type: AWS::Serverless::Function
-  RatingsDbTable:
+  ReviewsDbTable:
     Properties:
       AttributeDefinitions:
       - AttributeName: id
