@@ -55,6 +55,6 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: '1'
         WriteCapacityUnits: '1'
-      TableName: Review
+      TableName: Reviews
     Type: AWS::DynamoDB::Table
 Transform: AWS::Serverless-2016-10-31
