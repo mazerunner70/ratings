@@ -7,7 +7,7 @@ Outputs:
   HarvestReviewsApi:
     Description: URL for application
     Export:
-      Name: HarvestRatingsApi
+      Name: HarvestReviewsApi
     Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
 Parameters:
   amazonawsaccessKey:
