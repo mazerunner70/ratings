@@ -36,6 +36,7 @@ artifacts:
   files:
     - server/harvest/target/harvest-ratings-1.0-SNAPSHOT.jar
     - server/aws/sam-app/sam-ratings.yml
+    - server/harvest/config/packagespec.yml
   discard-paths: yes
 secondary-artifacts:
   cf-config:
