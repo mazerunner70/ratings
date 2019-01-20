@@ -26,11 +26,11 @@ Resources:
       CodeUri: ./harvest-ratings-1.0-SNAPSHOT.jar
       Environment:
         Variables:
-          AMAZONAWSACCESSKEY: !Ref 'AmazonAwsAccessKey'
-          AMAZONAWSSECRETKEY: !Ref 'AmazonAwsSecretKey'
-          AMAZONDYNAMODBENDPOINT: !Ref 'AmazonDynamoDbEndpoint'
-          IOSAPPID: !Ref 'IosAppId'
-          IOSURL: !Ref 'IosUrl'
+          AMAZON_AWS_ACCESSKEY: !Ref 'AmazonAwsAccessKey'
+          AMAZON_AWS_SECRETKEY: !Ref 'AmazonAwsSecretKey'
+          AMAZON_DYNAMODB_ENDPOINT: !Ref 'AmazonDynamoDbEndpoint'
+          IOS_APP_ID: !Ref 'IosAppId'
+          IOS_URL: !Ref 'IosUrl'
       Events:
         GetResource:
           Properties:
