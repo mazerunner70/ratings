@@ -158,14 +158,7 @@ Resources:
               Configuration:
                 ActionMode: CREATE_UPDATE
                 Capabilities: CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND
-                ParameterOverrides: |
-                  {
-                    "AmazonAwsAccessKey": {"Ref": "AmazonAwsAccessKey"},
-                    "AmazonAwsSecretKey": {"Ref": "AmazonAwsSecretKey"},
-                    "AmazonDynamoDbEndpoint": {"Ref": "AmazonDynamoDbEndpoint"}",
-                    "IosAppId": {"Ref": "IosAppId"},
-                    "IosUrl": {"Ref": "IosUrl"}
-                  }
+                ParameterOverrides: !Sub '{"AmazonAwsAccessKey": "${AmazonAwsAccessKey}", "AmazonAwsSecretKey": "${AmazonAwsSecretKey}", "AmazonDynamoDbEndpoint": "${AmazonDynamoDbEndpoint}", "IosAppId": "${IosAppId}", "IosUrl": "${IosUrl}"}'
                 TemplatePath: PackageOutput::sam-ratings-packaged.yaml
                 StackName: HarvestDeploy
                 RoleArn: arn:aws:iam::915524423834:role/mini-admin
