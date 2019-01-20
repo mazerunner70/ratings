@@ -10,15 +10,15 @@ Outputs:
       Name: HarvestReviewsApi
     Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
 Parameters:
-  amazonawsaccessKey:
+  AmazonAwsAccessKey:
     Type: String
-  amazonawssecretkey:
+  AmazonAwsSecretKey:
     Type: String
-  amazondynamodbendpoint:
+  AmazonDynamoDbEndpoint:
     Type: String
-  iOSAPPID:
+  IosAppId:
     Type: String
-  iOSurl:
+  IosUrl:
     Type: String
 Resources:
   HarvestReviewsFunction:
@@ -26,11 +26,11 @@ Resources:
       CodeUri: ./harvest-ratings-1.0-SNAPSHOT.jar
       Environment:
         Variables:
-          AMAZON_AWS_ACCESSKEY: !Ref 'amazonawsaccessKey'
-          AMAZON_AWS_SECRETKEY: !Ref 'amazonawssecretkey'
-          AMAZON_DYNAMODB_ENDPOINT: !Ref 'amazondynamodbendpoint'
-          IOS_APP_ID: !Ref 'iOSAPPID'
-          IOS_URL: !Ref 'iOSurl'
+          AMAZONAWSACCESSKEY: !Ref 'AmazonAwsAccessKey'
+          AMAZONAWSSECRETKEY: !Ref 'AmazonAwsSecretKey'
+          AMAZONDYNAMODBENDPOINT: !Ref 'AmazonDynamoDbEndpoint'
+          IOSAPPID: !Ref 'IosAppId'
+          IOSURL: !Ref 'IosUrl'
       Events:
         GetResource:
           Properties:

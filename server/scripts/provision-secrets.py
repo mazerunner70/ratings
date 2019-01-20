@@ -118,6 +118,7 @@ def edit_sam_template(file_config):
       cf_parameters[asLogicalId(secretid)] = {"Type": "String"}
     cf_resources = cf_template.get('Resources')
     cf_resource = cf_resources.get(name)
+    print ("cf_resource", name, cf_resource)
     cf_variables = cf_resource.get('Properties').get('Environment').get('Variables')
     cf_variables.clear()
     for secretid in secretids:

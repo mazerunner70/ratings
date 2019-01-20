@@ -16,10 +16,26 @@ Parameters:
   GitHubOAuthToken:
     Type: String
     NoEcho: true
-  BetaFleet:
-    Description: Fleet configured in CodeDeploy
+  AmazonAwsAccessKey:
+    Description: DynamoDb access key
     Type: String
-    Default: DemoFleet
+    NoEcho: true
+  AmazonAwsSecretKey:
+    Description: DynamoDb secret key
+    Type: String
+    NoEcho: true
+  AmazonDynamoDbEndpoint:
+    Description: DynamoDb service endpoint
+    Type: String
+    NoEcho: true
+  IosAppId:
+    Description: app id to harvest
+    Type: String
+    NoEcho: true
+  IosUrl:
+    Description: url for Ios rss feed
+    Type: String
+    NoEcho: true
 Resources:
   CodePipelineArtifactStoreBucket:
     Type: 'AWS::S3::Bucket'
@@ -144,11 +160,11 @@ Resources:
                 Capabilities: CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND
                 ParameterOverrides: |
                   {
-                    "amazonawsaccessKey": "opiu",
-                    "amazonawssecretkey": "oiuy",
-                    "amazondynamodbendpoint": "poiu",
-                    "iOSAPPID": "poiu",
-                     "iOSurl":"oiuy"
+                    "amazonawsaccessKey": {"Ref": "AmazonAwsAccessKey"},
+                    "amazonawssecretkey": {"Ref": "AmazonAwsSecretKey"},
+                    "amazondynamodbendpoint": {"Ref": "AmazonDynamoDbEndpoint"}",
+                    "iOSAPPID": {"Ref": "IosAppId"},
+                    "iOSurl": {"Ref": "IosUrl"}
                   }
                 TemplatePath: PackageOutput::sam-ratings-packaged.yaml
                 StackName: HarvestDeploy
