@@ -160,11 +160,11 @@ Resources:
                 Capabilities: CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND
                 ParameterOverrides: |
                   {
-                    "amazonawsaccessKey": {"Ref": "AmazonAwsAccessKey"},
-                    "amazonawssecretkey": {"Ref": "AmazonAwsSecretKey"},
-                    "amazondynamodbendpoint": {"Ref": "AmazonDynamoDbEndpoint"}",
-                    "iOSAPPID": {"Ref": "IosAppId"},
-                    "iOSurl": {"Ref": "IosUrl"}
+                    "AmazonAwsAccessKey": {"Ref": "AmazonAwsAccessKey"},
+                    "AmazonAwsSecretKey": {"Ref": "AmazonAwsSecretKey"},
+                    "AmazonDynamoDbEndpoint": {"Ref": "AmazonDynamoDbEndpoint"}",
+                    "IosAppId": {"Ref": "IosAppId"},
+                    "IosUrl": {"Ref": "IosUrl"}
                   }
                 TemplatePath: PackageOutput::sam-ratings-packaged.yaml
                 StackName: HarvestDeploy
