@@ -8,7 +8,7 @@ import uk.co.ameth.ratings.harvest.Review;
 
 import java.util.Objects;
 
-@DynamoDBTable(tableName = "Review")
+@DynamoDBTable(tableName = "Reviews")
 public class ReviewEntry {
 
     private String id;
