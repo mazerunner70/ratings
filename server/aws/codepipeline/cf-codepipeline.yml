@@ -16,15 +16,15 @@ Parameters:
   GitHubOAuthToken:
     Type: String
     NoEcho: true
-  AmazonAwsAccessKey:
+  AmazonAwsAccesskey:
     Description: DynamoDb access key
     Type: String
     NoEcho: true
-  AmazonAwsSecretKey:
+  AmazonAwsSecretkey:
     Description: DynamoDb secret key
     Type: String
     NoEcho: true
-  AmazonDynamoDbEndpoint:
+  AmazonDynamodbEndpoint:
     Description: DynamoDb service endpoint
     Type: String
     NoEcho: true
@@ -158,7 +158,7 @@ Resources:
               Configuration:
                 ActionMode: CREATE_UPDATE
                 Capabilities: CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND
-                ParameterOverrides: !Sub '{"AmazonAwsAccessKey": "${AmazonAwsAccessKey}", "AmazonAwsSecretKey": "${AmazonAwsSecretKey}", "AmazonDynamoDbEndpoint": "${AmazonDynamoDbEndpoint}", "IosAppId": "${IosAppId}", "IosUrl": "${IosUrl}"}'
+                ParameterOverrides: !Sub '{"AmazonAwsAccesskey": "${AmazonAwsAccesskey}", "AmazonAwsSecretkey": "${AmazonAwsSecretkey}", "AmazonDynamodbEndpoint": "${AmazonDynamodbEndpoint}", "IosAppId": "${IosAppId}", "IosUrl": "${IosUrl}"}'
                 TemplatePath: PackageOutput::sam-ratings-packaged.yaml
                 StackName: HarvestDeploy
                 RoleArn: arn:aws:iam::915524423834:role/mini-admin
@@ -266,7 +266,7 @@ Resources:
             Effect: Allow
             Principal:
               Service: codebuild.amazonaws.com
-            Action: sts:AssumeRole
+            Action: sts:AssumeRoleCodeBuildRatingsServiceRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
 

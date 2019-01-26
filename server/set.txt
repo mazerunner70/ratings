@@ -1,0 +1,1 @@
+https://a416o2b2s5.execute-api.eu-west-1.amazonaws.com/Prod/ping
