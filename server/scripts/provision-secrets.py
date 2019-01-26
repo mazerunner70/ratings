@@ -12,6 +12,7 @@ import sys
 import datetime
 import string
 import json
+import re
 from pathlib import Path
 
 
@@ -118,7 +119,7 @@ def edit_sam_template(file_config):
       cf_parameters[asLogicalId(secretid)] = {"Type": "String"}
     cf_resources = cf_template.get('Resources')
     cf_resource = cf_resources.get(name)
-    print ("cf_resource", name, cf_resource)
+#    print ("cf_resource", name, cf_resource)
     cf_variables = cf_resource.get('Properties').get('Environment').get('Variables')
     cf_variables.clear()
     for secretid in secretids:
@@ -131,12 +132,19 @@ def asLogicalId(text):
   return text.translate(str.maketrans('','',string.punctuation))
 
 def as_env_name(text):
-  return text.translate(str.maketrans(string.punctuation, '_'*len(string.punctuation))).upper()
+  nopunct = text.translate(str.maketrans(string.punctuation, '_'*len(string.punctuation)))
+
+  underscored = re.sub(r"([A-Z][0-9a-z]*)(?=[A-Z])", r"\1_", nopunct, 100)
+  return underscored.upper()
+
+def addunderscore(matchobj):
+  return matchobj.group(1)+"_"+matchobj.group(2)
 
 def rename_existing_file(file_location_string):
   os.rename(file_location_string, f"{file_location_string}-{datetime.datetime.now():%Y%m%d%H%M%S}")
 
 def write_out(file_location_string, text):
+  os.makedirs(os.path.dirname(file_location_string), exist_ok=True)
   with open(file_location_string, "w") as textfile:
     textfile.write(text)
 
