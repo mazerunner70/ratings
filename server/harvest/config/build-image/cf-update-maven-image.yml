@@ -56,7 +56,7 @@ Resources:
           - Name: ECR_IMAGE_TAG
             Value: !Sub "${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${ImageRepository}:${ApplicationName}"
       ServiceRole: !Ref CodeBuildRole
-      TimeoutInMinutes: 10
+      TimeoutInMinutes: 50
       Source:
         Type: CODEPIPELINE
         BuildSpec: server/harvest/config/build-image/image-buildspec.yml
