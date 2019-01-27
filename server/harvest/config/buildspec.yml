@@ -4,8 +4,8 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      - apt-get update -y
-      - apt-get install -y maven
+#      - apt-get update -y
+#      - apt-get install -y maven
       - cp server/harvest/config/settings.xml /root/.m2/settings.xml
     finally:
       - echo This always runs even if the update or install command fails 
