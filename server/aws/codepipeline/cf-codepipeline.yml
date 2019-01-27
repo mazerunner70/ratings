@@ -266,7 +266,7 @@ Resources:
             Effect: Allow
             Principal:
               Service: codebuild.amazonaws.com
-            Action: sts:AssumeRoleCodeBuildRatingsServiceRole
+            Action: sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
 
