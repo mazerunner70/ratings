@@ -17,7 +17,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @Import(RssParserTest.RssReaderConfiguration.class)
-class RssParserTest {
+public class RssParserTest {
 
     @TestConfiguration
     static class RssReaderConfiguration {
@@ -43,8 +42,8 @@ class RssParserTest {
     @Autowired
     private RssParser rssParser;
 
-    @MockBean
-    private HttpReader httpReader;
+//    @MockBean
+//    private HttpReader httpReader;
 
     @Test
     void asRssEntries() throws IOException, ParserConfigurationException, SAXException {

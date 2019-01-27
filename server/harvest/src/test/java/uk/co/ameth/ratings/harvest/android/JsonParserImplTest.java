@@ -20,7 +20,7 @@ import java.util.List;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @Import(JsonParserImplTest.JsonParserConfiguration.class)
-class JsonParserImplTest {
+public class JsonParserImplTest {
 
     @TestConfiguration
     static class JsonParserConfiguration {
@@ -38,7 +38,7 @@ class JsonParserImplTest {
     private JsonParser jsonParser;
 
     @Test
-    void parseJson() throws IOException {
+    public void parseJson() throws IOException {
         String jsonString = getJsonString();
         List<Review> reviews = jsonParser.parseJson(jsonString);
     }
