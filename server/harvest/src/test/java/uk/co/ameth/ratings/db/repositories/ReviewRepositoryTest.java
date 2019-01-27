@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.*;
         "amazon.aws.accessKey=testaccesskey",
         "amazon.aws.secretkey=testsecretkey"
 })
-class ReviewRepositoryTest {
+public class ReviewRepositoryTest {
 
 
 
@@ -59,10 +59,10 @@ class ReviewRepositoryTest {
         private String amazonAwsSecretKey;
         @Bean
         public AmazonDynamoDB amazonDynamoDB() {
-        AmazonDynamoDB amazonDynamoDB = new AmazonDynamoDBClient(amazonAwsCredentials());
-        if (!StringUtils.isEmpty(amazonDynamoDbEndpoint)) {
-            amazonDynamoDB.setEndpoint(amazonDynamoDbEndpoint);
-        }
+            AmazonDynamoDB amazonDynamoDB = new AmazonDynamoDBClient(amazonAwsCredentials());
+            if (!StringUtils.isEmpty(amazonDynamoDbEndpoint)) {
+                amazonDynamoDB.setEndpoint(amazonDynamoDbEndpoint);
+            }
             return amazonDynamoDB;
         }
         @Bean
