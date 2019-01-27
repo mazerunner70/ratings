@@ -248,7 +248,7 @@ Resources:
       Description: Build mechanism for RatingsHarvester
       Environment:
         Type: LINUX_CONTAINER
-        Image: aws/codebuild/java:openjdk-8
+        Image: 915524423834.dkr.ecr.eu-west-1.amazonaws.com/maven-image-sjpw9bfstdv2:rating
         ComputeType: BUILD_GENERAL1_SMALL
         PrivilegedMode: false
       ServiceRole: !Ref CodeBuildRatingsServiceRole
